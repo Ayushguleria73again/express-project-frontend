@@ -1,4 +1,5 @@
 import Signup from "./assets/Signup"
+import Table from "./assets/Table"
 import Toster from "./Toster"
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
    <Toster/>
     <Signup/>
+    <Table/>
     </>
   )
 }
