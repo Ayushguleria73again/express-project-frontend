@@ -25,9 +25,7 @@ const Table = () => {
       });
 
       const data = await res.json();
-
-      if (data.message === "user deleted successfully") {
-
+        setState((prevState) => prevState.filter((user) => user._id !== id));
         toast.success(data.message, {
           position: "top-right",
           autoClose: 5000,
@@ -39,20 +37,7 @@ const Table = () => {
           theme: "light",
           transition: Bounce,
         });
-        setState((prevState) => prevState.filter((user) => user._id !== id));
-      } else {
-        toast.warn(data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
-      }
+
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong", {
