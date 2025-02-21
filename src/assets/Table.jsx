@@ -54,6 +54,10 @@ const Table = () => {
     }
   };
 
+  const dataRefresh = ()=>{
+    window.location.reload()
+  }
+
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -63,6 +67,10 @@ const Table = () => {
             <p className="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
               Here is the list of all the students in your school
             </p>
+
+            <div className="mt-8">
+                        <button type="submit" value="Refresh" className=" py-3 px-6 text-sm tracking-wider rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" onClick={dataRefresh}>Refresh</button>
+                    </div>
           </caption>
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -71,17 +79,18 @@ const Table = () => {
               <th scope="col" className="px-6 py-3">Age</th>
               <th scope="col" className="px-6 py-3">Phone</th>
               <th scope="col" className="px-6 py-3">Email</th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3">Created On</th>
+              <th scope="col" className="px-3 py-2">
                 <span className="sr-only">Edit</span>
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-3 py-2">
                 <span className="sr-only">Delete</span>
               </th>
             </tr>
           </thead>
           <tbody>
             {state.map((newdata, index) => {
-              const { _id, name, last, userClass, phone, age, email } = newdata;
+              const { _id, name, last, userClass, phone, age, email,createdOn } = newdata;
               return (
                 <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                   <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -91,12 +100,13 @@ const Table = () => {
                   <td className="px-6 py-4">{age}</td>
                   <td className="px-6 py-4">{phone}</td>
                   <td className="px-6 py-4">{email}</td>
-                  <td className="px-6 py-4 text-right">
+                  <td className="px-6 py-4">{createdOn}</td>
+                  <td className="px-3 py-2 text-right">
                     <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                       <MdEdit />
                     </a>
                   </td>
-                  <td className="px-6 py-4 text-right">
+                  <td className="px-3 py-2 text-left">
                     <button
                       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                       onClick={() => deleteUser(_id)}
