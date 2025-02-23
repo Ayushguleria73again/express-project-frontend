@@ -3,6 +3,8 @@ import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 import { Bounce } from "react-toastify";
+import { IoMdEye } from "react-icons/io";
+import  {Link } from "react-router-dom";
 
 const Table = () => {
   const [state, setState] = useState([]);
@@ -25,18 +27,18 @@ const Table = () => {
       });
 
       const data = await res.json();
-        setState((prevState) => prevState.filter((user) => user._id !== id));
-        toast.success(data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+      setState((prevState) => prevState.filter((user) => user._id !== id));
+      toast.success(data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
 
     } catch (error) {
       console.log(error);
@@ -54,7 +56,7 @@ const Table = () => {
     }
   };
 
-  const dataRefresh = ()=>{
+  const dataRefresh = () => {
     window.location.reload()
   }
 
@@ -69,8 +71,8 @@ const Table = () => {
             </p>
 
             <div className="mt-8">
-                        <button type="submit" value="Refresh" className=" py-3 px-6 text-sm tracking-wider rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" onClick={dataRefresh}>Refresh</button>
-                    </div>
+              <button type="submit" value="Refresh" className=" py-3 px-6 text-sm tracking-wider rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" onClick={dataRefresh}>Refresh</button>
+            </div>
           </caption>
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -84,13 +86,16 @@ const Table = () => {
                 <span className="sr-only">Edit</span>
               </th>
               <th scope="col" className="px-3 py-2">
+                <span className="sr-only">View</span>
+              </th>
+              <th scope="col" className="px-3 py-2">
                 <span className="sr-only">Delete</span>
               </th>
             </tr>
           </thead>
           <tbody>
             {state.map((newdata, index) => {
-              const { _id, name, last, userClass, phone, age, email,createdOn } = newdata;
+              const { _id, name, last, userClass, phone, age, email, createdOn } = newdata;
               return (
                 <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                   <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -103,8 +108,13 @@ const Table = () => {
                   <td className="px-6 py-4">{createdOn}</td>
                   <td className="px-3 py-2 text-right">
                     <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                      <MdEdit />
+                      <IoMdEye />
                     </a>
+                  </td>
+                  <td className="px-3 py-2 text-right">
+                    <Link to={`/Update/${_id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                      <MdEdit />
+                    </Link>
                   </td>
                   <td className="px-3 py-2 text-left">
                     <button
