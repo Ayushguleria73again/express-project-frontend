@@ -71,7 +71,11 @@ const Table = () => {
             </p>
 
             <div className="mt-8">
+            <Link type="submit" value="Refresh" className=" py-3 px-6 mx-3 text-sm tracking-wider rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" to={"/Search"}>Search</Link> 
               <button type="submit" value="Refresh" className=" py-3 px-6 text-sm tracking-wider rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" onClick={dataRefresh}>Refresh</button>
+            </div>
+            <div className="mt-8">
+           
             </div>
           </caption>
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
