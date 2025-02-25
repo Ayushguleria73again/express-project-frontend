@@ -107,7 +107,7 @@ const Table = () => {
                   </th>
                   <td className="px-6 py-4">{userClass}</td>
                   <td className="px-6 py-4">{age}</td>
-                  <td className="px-6 py-4">{phone}</td>
+                  <td className="px-6 py-4">+91 {phone}</td>
                   <td className="px-6 py-4">{email}</td>
                   <td className="px-6 py-4">{createdOn}</td>
                   <td className="px-3 py-2 text-right">
