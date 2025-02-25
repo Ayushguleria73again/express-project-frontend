@@ -71,8 +71,8 @@ const Table = () => {
             </p>
 
             <div className="mt-8">
-            <Link type="submit" value="Refresh" className=" py-3 px-6 mx-3 text-sm tracking-wider rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" to={"/Search"}>Search</Link> 
-              <button type="submit" value="Refresh" className=" py-3 px-6 text-sm tracking-wider rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" onClick={dataRefresh}>Refresh</button>
+            <Link type="submit" value="Refresh" className=" py-2 px-6 mx-3 text-sm tracking-wider rounded text-white bg-blue-600 hover:bg-blue-900 focus:outline-none" to={"/Search"}>Search</Link> 
+              <Link type="submit" value="Refresh" className=" py-2 px-6  mx-3 text-sm tracking-wider rounded text-white bg-blue-600 hover:bg-blue-900 focus:outline-none" onClick={dataRefresh}>Refresh</Link>
             </div>
             <div className="mt-8">
            
@@ -111,18 +111,18 @@ const Table = () => {
                   <td className="px-6 py-4">{email}</td>
                   <td className="px-6 py-4">{createdOn}</td>
                   <td className="px-3 py-2 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 ">
                       <IoMdEye />
                     </a>
                   </td>
                   <td className="px-3 py-2 text-right">
-                    <Link to={`/Update/${_id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    <Link to={`/Update/${_id}`} className="font-medium text-blue-600 dark:text-blue-500 ">
                       <MdEdit />
                     </Link>
                   </td>
                   <td className="px-3 py-2 text-left">
                     <button
-                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      className="font-medium text-blue-600 dark:text-blue-500 "
                       onClick={() => deleteUser(_id)}
                     >
                       <MdDelete />
