@@ -67,7 +67,7 @@ function Update() {
         else {
             toast.success(res.message, {
                 position: "top-right",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: false,
                 pauseOnHover: true,
@@ -78,7 +78,7 @@ function Update() {
             });
             setTimeout(() => {
                 window.location.href = "http://localhost:5173/Table";
-            }, 3000);
+            }, 2000);
 
         }
     }

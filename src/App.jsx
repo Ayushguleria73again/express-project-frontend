@@ -15,6 +15,7 @@ function App() {
     <Route path="/Update/:id" element={<Update/>}/>
     <Route path="/Search" element={<Search/>}/>
     </Routes>
+    
     </>
   )
 }

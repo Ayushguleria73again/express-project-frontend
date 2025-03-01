@@ -77,7 +77,7 @@ function Searchbox() {
                     <caption className="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                         Your Data
                         <p className="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
-                           You can search students by Name
+                            You can search students by Name
                         </p>
                         <form className="max-w-md mx-auto">
                             <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -153,8 +153,7 @@ function Searchbox() {
                                         <td className="px-3 py-2 text-left">
                                             <button
                                                 className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                                onClick={() => deleteUser(_id)}
-                                            >
+                                                onClick={() => deleteUser(_id)}>
                                                 <MdDelete />
                                             </button>
                                         </td>
