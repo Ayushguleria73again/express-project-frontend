@@ -87,6 +87,14 @@ const Table = () => {
             </p>
 
             <div className="mt-8">
+            <Link
+                type="submit"
+                value="Search"
+                className="py-2 px-6 mx-3 text-sm tracking-wider rounded text-white bg-blue-600 hover:bg-blue-900 focus:outline-none"
+                to={"/Mail"}
+              >
+                Contact us
+              </Link>
               <Link
                 type="submit"
                 value="Search"
@@ -163,7 +171,7 @@ const Table = () => {
                     </Link>
                     <button
                       className="font-medium text-blue-600 dark:text-blue-500"
-                      onClick={() => openModal(newdata, "delete")}
+                      onClick={() => openModal(newdata)}
                     >
                       <MdDelete />
                     </button>
@@ -225,7 +233,7 @@ const Table = () => {
                   type="button"
                   className="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                 >
-                  Yes, I'm sure
+                  Yes, I'm sure 
                 </button>
                 <button
                   type="button"
@@ -240,7 +248,7 @@ const Table = () => {
         </div>
       )}
 
-      {show && modalState?.action !== "delete" && (
+      {show && modalState && (
         <div
           id="static-modal"
           tabIndex="-1"
@@ -307,7 +315,7 @@ const Table = () => {
                   Edit
                 </Link>
                 <button
-                  onClick={() => openModal(modalState.selectedUser, "delete")}
+                  onClick={() => openModal(modalState.selectedUser)}
                   type="button"
                   className="py-2.5 px-5 ms-3 text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none rounded-lg focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                 >

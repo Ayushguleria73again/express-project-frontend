@@ -4,6 +4,7 @@ import Update from "./assets/Update"
 import Toster from "./Toster"
 import Search from "./assets/Searchbox"
 import {Route,Routes} from 'react-router-dom'
+import Mail from "./assets/Mail"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
     <Route path="/Table" element={<Table/>} />
     <Route path="/Update/:id" element={<Update/>}/>
     <Route path="/Search" element={<Search/>}/>
+    <Route path="/Mail" element={<Mail/>}/>
     </Routes>
     
     </>

@@ -10,8 +10,13 @@ function Signup() {
         userClass: "",
         phone: "",
         age: "",
-        email: ""
+        email: "",
+        password:"",
     })
+    const [toggle,setToggle] = useState(false)
+    const viewHide = ()=>{
+        setToggle(!toggle)
+    }
     const handleValue = (e) => {
         setstate({
             ...state,
@@ -121,6 +126,15 @@ function Signup() {
                                 type="text"
                                 className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
                                 placeholder="Enter email" />
+                        </div>
+                        <div>
+                        <label className="text-gray-600 text-sm mb-2 block">Password</label>
+                            <input name="password"
+                                onChange={handleValue}
+                                value={state.password}
+                                type={toggle?"text":"password"}
+                                className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+                                placeholder="Enter Password"  onClick={viewHide}/>  <span>{toggle?"hide":"show"}</span>
                         </div>
                         <div>
                             <label className="text-gray-600 text-sm mb-2 block">Class</label>
