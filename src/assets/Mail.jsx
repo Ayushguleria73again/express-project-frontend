@@ -18,7 +18,7 @@ function Mail() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true); // Set loading to true when form is submitted
+    setIsLoading(true);
 
     try {
       const response = await fetch('http://localhost:8000/routes/mail', {
@@ -26,7 +26,7 @@ function Mail() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(state), // Send the state object as the request body
+        body: JSON.stringify(state),
       });
 
       const res = await response.json();
@@ -70,7 +70,10 @@ function Mail() {
         transition: Bounce,
       });
     } finally {
-      setIsLoading(false); // Reset loading state when request is complete
+      setIsLoading(false);
+      setTimeout(() => {
+        window.location.href = "http://localhost:5173/Table";
+    }, 3000);
     }
   };
 
@@ -151,6 +154,7 @@ function Mail() {
                   </li>
                 </ul>
               </div>
+             
               <div className="card h-fit max-w-6xl p-5 md:p-12" id="form">
                 <h2 className="mb-4 text-2xl font-bold dark:text-white">Ready to Get Started?</h2>
                 <form onSubmit={handleSubmit}>
@@ -225,6 +229,7 @@ function Mail() {
                         'Send Message'
                       )}
                     </button>
+                   
                   </div>
                 </form>
               </div>
