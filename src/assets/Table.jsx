@@ -73,13 +73,19 @@ const Table = () => {
       })
       .catch((error) => {
         console.log(error);
+        toast.error("Failed to load data", {
+          position: "top-right",
+          autoClose: 5000,
+          theme: "light",
+          transition: Bounce,
+        });
       });
   }, []);
 
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <table className="w-full  text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <caption className="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
             Your Data
             <p className="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -87,7 +93,7 @@ const Table = () => {
             </p>
 
             <div className="mt-8">
-            <Link
+              <Link
                 type="submit"
                 value="Search"
                 className="py-2 px-6 mx-3 text-sm tracking-wider rounded text-white bg-blue-600 hover:bg-blue-900 focus:outline-none"
@@ -135,54 +141,62 @@ const Table = () => {
                 Created On
               </th>
               <th scope="col" className="px-3 py-2">
-                Actions
               </th>
             </tr>
           </thead>
           <tbody>
-            {state.map((newdata, index) => {
-              const { _id, name, last, userClass, age, createdOn } = newdata;
-              return (
-                <tr
-                  key={index}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
-                >
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            {state.length === 0 ? (
+              <tr>
+                <td colSpan="5" className="text-center py-4 text-gray-500">
+                  No data available
+                </td>
+              </tr>
+            ) : (
+              state.map((newdata, index) => {
+                const { _id, name, last, userClass, age, createdOn } = newdata;
+                return (
+                  <tr
+                    key={index}
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
                   >
-                    {`${name} ${last}`}
-                  </th>
-                  <td className="px-6 py-4">{userClass}</td>
-                  <td className="px-6 py-4">{age}</td>
-                  <td className="px-6 py-4">{createdOn}</td>
-                  <td className="px-3 py-2 text-right flex items-center justify-end gap-6">
-                    <button
-                      onClick={() => openModal(newdata)}
-                      className="font-medium text-blue-600 dark:text-blue-500"
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                      <IoMdEye />
-                    </button>
-                    <Link
-                      to={`/Update/${_id}`}
-                      className="font-medium text-blue-600 dark:text-blue-500"
-                    >
-                      <MdEdit />
-                    </Link>
-                    <button
-                      className="font-medium text-blue-600 dark:text-blue-500"
-                      onClick={() => openModal(newdata)}
-                    >
-                      <MdDelete />
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+                      {`${name} ${last}`}
+                    </th>
+                    <td className="px-6 py-4">{userClass}</td>
+                    <td className="px-6 py-4">{age}</td>
+                    <td className="px-6 py-4">{createdOn}</td>
+                    <td className="px-3 py-2 text-right flex items-center justify-end gap-6">
+                      <button
+                        onClick={() => openModal(newdata)}
+                        className="font-medium text-blue-600 dark:text-blue-500"
+                      >
+                        <IoMdEye />
+                      </button>
+                      <Link
+                        to={`/Update/${_id}`}
+                        className="font-medium text-blue-600 dark:text-blue-500"
+                      >
+                        <MdEdit />
+                      </Link>
+                      <button
+                        className="font-medium text-blue-600 dark:text-blue-500"
+                        onClick={() => openModal(newdata, "delete")}
+                      >
+                        <MdDelete />
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            )}
           </tbody>
         </table>
       </div>
 
+      {/* Deletion Modal */}
       {show && modalState?.action === "delete" && (
         <div
           id="static-modal"
@@ -233,7 +247,7 @@ const Table = () => {
                   type="button"
                   className="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                 >
-                  Yes, I'm sure 
+                  Yes, I&apos;m sure
                 </button>
                 <button
                   type="button"
@@ -248,7 +262,8 @@ const Table = () => {
         </div>
       )}
 
-      {show && modalState && (
+      {/* View Modal */}
+      {show && modalState && modalState?.action !== "delete" && (
         <div
           id="static-modal"
           tabIndex="-1"
@@ -306,7 +321,7 @@ const Table = () => {
                 </p>
               </div>
 
-              <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+              <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600 gap-3">
                 <Link
                   to={`/Update/${modalState.selectedUser._id}`}
                   type="button"
@@ -315,7 +330,7 @@ const Table = () => {
                   Edit
                 </Link>
                 <button
-                  onClick={() => openModal(modalState.selectedUser)}
+                  onClick={() => openModal(modalState.selectedUser, "delete")}
                   type="button"
                   className="py-2.5 px-5 ms-3 text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none rounded-lg focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                 >

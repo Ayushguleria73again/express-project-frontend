@@ -54,7 +54,7 @@ function Signup() {
         const res = await response.json();
         console.log(res);
 
-        if (res.message === "email or phone already exist") {
+        if (res.message === "Email or phone already exist") {
             toast.warn(res.message, {
                 position: "top-right",
                 autoClose: 5000,
@@ -66,7 +66,7 @@ function Signup() {
                 theme: "light",
                 transition: Bounce,
             });
-        } else if (res.message === "please fill all the fields") {
+        } else if (res.message === "Please fill all the fields") {
             toast.warn(res.message, {
                 position: "top-right",
                 autoClose: 5000,

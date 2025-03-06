@@ -51,7 +51,7 @@ function Update() {
                 transition: Bounce,
             });
         }
-        else if (res.message === "please fill all the feilds") {
+        else if (res.message === "Please fill all the feilds") {
             toast.warn(res.message, {
                 position: "top-right",
                 autoClose: 3000,
