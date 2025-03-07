@@ -1,5 +1,5 @@
 import { ToastContainer } from "react-toastify"
-import { Bounce } from "react-toastify"
+import { Zoom } from "react-toastify"
 function Toster() {
   return (
     <>
@@ -14,7 +14,7 @@ function Toster() {
         draggable
         pauseOnHover
         theme="light"
-        transition={Bounce}
+        transition={Zoom}
       />
     </>
   )

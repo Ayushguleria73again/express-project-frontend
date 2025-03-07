@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Bounce } from "react-toastify";
+import { Zoom } from "react-toastify";
 
 function Signup() {
     const [state, setState] = useState({
@@ -40,7 +40,7 @@ function Signup() {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                transition: Bounce,
+                transition: Zoom,
             });
             return;
         }
@@ -64,7 +64,7 @@ function Signup() {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                transition: Bounce,
+                transition: Zoom,
             });
         } else if (res.message === "Please fill all the fields") {
             toast.warn(res.message, {
@@ -76,7 +76,7 @@ function Signup() {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                transition: Bounce,
+                transition: Zoom,
             });
         } else if (res.message === "Server error") {
             toast.warn(res.message, {
@@ -88,7 +88,7 @@ function Signup() {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                transition: Bounce,
+                transition: Zoom,
             });
         } else {
             toast.success(res.message, {
@@ -100,7 +100,7 @@ function Signup() {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                transition: Bounce,
+                transition: Zoom,
             });
             setTimeout(() => {
                 window.location.href = "http://localhost:5173/Table";

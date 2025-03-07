@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom'
-import { toast, Bounce } from "react-toastify";
+import { toast ,Zoom} from "react-toastify";
 function Update() {
     const { id } = useParams()
     const [state, setState] = useState({
@@ -48,7 +48,7 @@ function Update() {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                transition: Bounce,
+                transition: Zoom,
             });
         }
         else if (res.message === "Please fill all the feilds") {
@@ -61,7 +61,7 @@ function Update() {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                transition: Bounce,
+                transition: Zoom,
             });
         }
         else {
@@ -74,7 +74,7 @@ function Update() {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                transition: Bounce,
+                transition:Zoom,
             });
             setTimeout(() => {
                 window.location.href = "http://localhost:5173/Table";

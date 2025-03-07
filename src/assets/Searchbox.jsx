@@ -4,7 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { IoMdEye } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Bounce } from "react-toastify";
+import { Zoom } from "react-toastify";
 
 function Searchbox() {
     const [find, setFind] = useState({ name: "" });
@@ -40,7 +40,7 @@ function Searchbox() {
                 position: "top-right",
                 autoClose: 5000,
                 theme: "light",
-                transition: Bounce,
+                transition: Zoom,
             });
         }
     };
@@ -75,7 +75,7 @@ function Searchbox() {
                 position: "top-right",
                 autoClose: 3000, // Increased duration for delete success
                 theme: "light",
-                transition: Bounce,
+                transition: Zoom,
             });
 
             setTimeout(() => {
@@ -87,7 +87,7 @@ function Searchbox() {
                 position: "top-right",
                 autoClose: 5000,
                 theme: "light",
-                transition: Bounce,
+                transition: Zoom,
             });
         }
     };

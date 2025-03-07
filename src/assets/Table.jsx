@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
-import { Bounce } from "react-toastify";
+import { Zoom } from "react-toastify";
 import { IoMdEye } from "react-icons/io";
 import { Link } from "react-router-dom";
 
@@ -31,7 +31,7 @@ const Table = () => {
         position: "top-right",
         autoClose: 1000,
         theme: "light",
-        transition: Bounce,
+        transition:Zoom,
       });
 
       setTimeout(() => {
@@ -43,7 +43,7 @@ const Table = () => {
         position: "top-right",
         autoClose: 5000,
         theme: "light",
-        transition: Bounce,
+        transition: Zoom,
       });
     }
   };
@@ -60,7 +60,7 @@ const Table = () => {
           position: "top-right",
           autoClose: 5000,
           theme: "light",
-          transition: Bounce,
+          transition: Zoom,
         });
       });
   };
@@ -77,7 +77,7 @@ const Table = () => {
           position: "top-right",
           autoClose: 5000,
           theme: "light",
-          transition: Bounce,
+          transition: Zoom,
         });
       });
   }, []);

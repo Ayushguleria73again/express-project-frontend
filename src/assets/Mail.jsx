@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { Bounce } from 'react-toastify';
+import { Zoom } from 'react-toastify';
 
 function Mail() {
   const [state, setState] = useState({
@@ -15,11 +15,9 @@ function Mail() {
     const { name, value } = e.target;
     setState((prevState) => ({ ...prevState, [name]: value }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
     try {
       const response = await fetch('http://localhost:8000/routes/mail', {
         method: 'POST',
@@ -42,7 +40,7 @@ function Mail() {
           draggable: true,
           progress: undefined,
           theme: 'light',
-          transition: Bounce,
+          transition: Zoom,
         });
       } else {
         toast.success(res.message, {
@@ -54,7 +52,7 @@ function Mail() {
           draggable: true,
           progress: undefined,
           theme: 'light',
-          transition: Bounce,
+          transition:Zoom,
         });
       }
     } catch (error) {
@@ -67,7 +65,7 @@ function Mail() {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        transition: Bounce,
+        transition: Zoom,
       });
     } finally {
       setIsLoading(false);
