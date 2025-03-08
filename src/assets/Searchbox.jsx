@@ -15,7 +15,8 @@ function Searchbox() {
         message: "",
         success: ""
     });
-
+    const [deleteText, setDeleteText] = useState("");
+    
     // Handle search input changes
     const handleValue = (e) => {
         setFind({
@@ -58,32 +59,41 @@ function Searchbox() {
     };
 
     // Delete user function
-    const deleteUser = async (id) => {
-        try {
-            const res = await fetch(`http://localhost:8000/routes/delete/${id}`, {
-                method: "DELETE",
-            });
-            const data = await res.json();
+    const deleteUser = async () => {
+        if (deleteText === modalState?.selectedUser?.name) {
+            try {
+                const res = await fetch(`http://localhost:8000/routes/delete/${modalState.selectedUser._id}`, {
+                    method: "DELETE",
+                });
+                const data = await res.json();
 
-            // Filter out the deleted user from the data
-            setDoms((prevState) => ({
-                ...prevState,
-                data: prevState.data.filter((user) => user._id !== id)
-            }));
+                // Filter out the deleted user from the data
+                setDoms((prevState) => ({
+                    ...prevState,
+                    data: prevState.data.filter((user) => user._id !== modalState.selectedUser._id)
+                }));
 
-            toast.success(data.message, {
-                position: "top-right",
-                autoClose: 3000, // Increased duration for delete success
-                theme: "light",
-                transition: Zoom,
-            });
+                toast.success(data.message, {
+                    position: "top-right",
+                    autoClose: 3000, // Increased duration for delete success
+                    theme: "light",
+                    transition: Zoom,
+                });
 
-            setTimeout(() => {
-                closeModal();
-            }, 1000);
-        } catch (error) {
-            console.log(error);
-            toast.error(error.message || "Something went wrong", {
+                setTimeout(() => {
+                    closeModal();
+                }, 1000);
+            } catch (error) {
+                console.log(error);
+                toast.error(error.message || "Something went wrong", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    theme: "light",
+                    transition: Zoom,
+                });
+            }
+        } else {
+            toast.error("Text doesn't match! Please type the name to confirm deletion.", {
                 position: "top-right",
                 autoClose: 5000,
                 theme: "light",
@@ -142,16 +152,11 @@ function Searchbox() {
                             <th scope="col" className="px-6 py-3">Name</th>
                             <th scope="col" className="px-6 py-3">Class</th>
                             <th scope="col" className="px-6 py-3">Age</th>
-                            <th scope="col" className="px-6 py-3">Phone</th>
-                            <th scope="col" className="px-6 py-3">Email</th>
                             <th scope="col" className="px-6 py-3">Created On</th>
+                            <th scope="col" className="px-6 py-3">Gender</th>
                             <th scope="col" className="px-3 py-2">
                                 <span className="sr-only">Edit</span>
-                            </th>
-                            <th scope="col" className="px-3 py-2">
                                 <span className="sr-only">View</span>
-                            </th>
-                            <th scope="col" className="px-3 py-2">
                                 <span className="sr-only">Delete</span>
                             </th>
                         </tr>
@@ -159,7 +164,7 @@ function Searchbox() {
                     <tbody>
                         {doms.data && doms.data.length > 0 ? (
                             doms.data.map((newdata, index) => {
-                                const { _id, name, last, userClass, age, phone, email, createdOn } = newdata;
+                                const { _id, name, last, userClass, age, createdOn , gender } = newdata;
                                 return (
                                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -167,23 +172,18 @@ function Searchbox() {
                                         </th>
                                         <td className="px-6 py-4">{userClass}</td>
                                         <td className="px-6 py-4">{age}</td>
-                                        <td className="px-6 py-4">+91 {phone}</td>
-                                        <td className="px-6 py-4">{email}</td>
                                         <td className="px-6 py-4">{createdOn}</td>
-                                        <td>
+                                        <td className="px-6 py-4">{gender}</td>
+                                        <td className="px-6 py-4 flex gap-6 justify-end">
                                             <button
                                                 className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                                                 onClick={() => openModal(newdata)}
                                             >
                                                 <IoMdEye />
                                             </button>
-                                        </td>
-                                        <td className="px-3 py-2 text-right">
                                             <Link to={`/Update/${_id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                                 <MdEdit />
                                             </Link>
-                                        </td>
-                                        <td className="px-3 py-2 text-left">
                                             <button
                                                 className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                                                 onClick={() => openModal(newdata, "delete")}
@@ -212,7 +212,7 @@ function Searchbox() {
                     aria-hidden="true"
                     className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-[#00000008] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0 backdrop-saturate-100 backdrop-contrast-100"
                 >
-                    <div className="relative p-4 w-full max-w-2xl max-h-full">
+                    <div data-aos="flip-down" className="relative p-4 w-full max-w-2xl max-h-full">
                         <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
                             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
@@ -246,12 +246,18 @@ function Searchbox() {
                                 <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                                     Are you sure you want to delete{" "}
                                     <strong>{modalState.selectedUser?.name}</strong>?
+                                    <h1>Write the value above to delete: <input
+                                       type="text"
+                                       value={deleteText}
+                                       onChange={(e) => setDeleteText(e.target.value)}
+                                       className="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded focus:bg-transparent outline-blue-500 transition-all"
+                                    /></h1>
                                 </p>
                             </div>
 
                             <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                                 <button
-                                    onClick={() => deleteUser(modalState.selectedUser._id)}
+                                    onClick={deleteUser}
                                     type="button"
                                     className="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                                 >
@@ -277,7 +283,7 @@ function Searchbox() {
                     aria-hidden="true"
                     className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-[#00000008] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0 backdrop-saturate-100 backdrop-contrast-100"
                 >
-                    <div className="relative p-4 w-full max-w-2xl max-h-full">
+                    <div data-aos="flip-down" className="relative p-4 w-full max-w-2xl max-h-full">
                         <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
                             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">

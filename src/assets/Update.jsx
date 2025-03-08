@@ -10,7 +10,8 @@ function Update() {
         userClass: "",
         phone: "",
         age: "",
-        email: ""
+        email: "",
+        gender:""
     });
 
     useEffect(() => {
@@ -109,6 +110,23 @@ function Update() {
                                 type="text"
                                 className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
                                 placeholder="Enter last name" />
+                        </div>
+                        <div>
+                            <label className="text-gray-600 text-sm mb-2 block">Gender</label>
+                            <select
+                                name="gender"
+                                onChange={handleValue}
+                                value={state.gender}
+                                type="text"
+                                className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+                                placeholder="Enter gender"
+                            >
+                            <option value="select">select</option>
+                             <option value="male">Male</option>
+                             <option value="female">Female</option>
+                             <option value="others">Others</option>
+
+                            </select>
                         </div>
                         <div>
                             <label className="text-gray-600 text-sm mb-2 block">Email Id</label>

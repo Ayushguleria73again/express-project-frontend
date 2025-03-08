@@ -11,6 +11,7 @@ function Signup() {
         age: "",
         email: "",
         password: "",
+        gender:"",
     });
 
     const [toggle, setToggle] = useState(false);
@@ -54,31 +55,7 @@ function Signup() {
         const res = await response.json();
         console.log(res);
 
-        if (res.message === "Email or phone already exist") {
-            toast.warn(res.message, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: false,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Zoom,
-            });
-        } else if (res.message === "Please fill all the fields") {
-            toast.warn(res.message, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: false,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Zoom,
-            });
-        } else if (res.message === "Server error") {
+        if (res.success === false) {
             toast.warn(res.message, {
                 position: "top-right",
                 autoClose: 5000,
@@ -139,6 +116,23 @@ function Signup() {
                                 className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
                                 placeholder="Enter last name"
                             />
+                        </div>
+                        <div>
+                            <label className="text-gray-600 text-sm mb-2 block">Gender</label>
+                            <select
+                                name="gender"
+                                onChange={handleValue}
+                                value={state.gender}
+                                type="text"
+                                className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+                                placeholder="Enter gender"
+                            >
+                            <option value="select">Select</option>
+                             <option value="male">Male</option>
+                             <option value="female">Female</option>
+                             <option value="others">Others</option>
+
+                            </select>
                         </div>
                         <div>
                             <label className="text-gray-600 text-sm mb-2 block">Email Id</label>
@@ -206,8 +200,9 @@ function Signup() {
                         </div>
                     </div>
 
-                    <div className="mt-8">
+                    <div className="mt-8" data-aos="zoom-in-up">
                         <input
+                       
                             type="submit"
                             value="Sign up"
                             className="mx-auto block py-3 px-6 text-sm tracking-wider rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
