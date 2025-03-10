@@ -17,7 +17,6 @@ function Searchbox() {
     });
     const [deleteText, setDeleteText] = useState("");
     
-    // Handle search input changes
     const handleValue = (e) => {
         setFind({
             ...find,
@@ -25,7 +24,6 @@ function Searchbox() {
         });
     };
 
-    // Search function to fetch data from the server
     const submit = async (e) => {
         e.preventDefault();
         try {
@@ -46,19 +44,18 @@ function Searchbox() {
         }
     };
 
-    // Open modal with user data
+   
     const openModal = (user, action = null) => {
         setModalState({ selectedUser: user, action });
         setShow(true);
     };
 
-    // Close modal
+  
     const closeModal = () => {
         setShow(false);
         setModalState(null);
     };
 
-    // Delete user function
     const deleteUser = async () => {
         if (deleteText === modalState?.selectedUser?.name) {
             try {
@@ -67,7 +64,7 @@ function Searchbox() {
                 });
                 const data = await res.json();
 
-                // Filter out the deleted user from the data
+        
                 setDoms((prevState) => ({
                     ...prevState,
                     data: prevState.data.filter((user) => user._id !== modalState.selectedUser._id)
@@ -75,7 +72,7 @@ function Searchbox() {
 
                 toast.success(data.message, {
                     position: "top-right",
-                    autoClose: 3000, // Increased duration for delete success
+                    autoClose: 3000,
                     theme: "light",
                     transition: Zoom,
                 });
