@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Zoom } from "react-toastify";
+import Add from "./Add";
+
 
 function Signup() {
     const [state, setState] = useState({
@@ -210,6 +212,7 @@ function Signup() {
                     </div>
                 </form>
             </div>
+            <Add/>
         </>
     );
 }
